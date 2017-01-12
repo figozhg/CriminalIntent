@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,16 @@ public class CrimeFragment extends Fragment {
         });
 
         mDateButton = (Button)v.findViewById(R.id.crime_date);
-        mDateButton.setText(mCrime.getDate().toString());
+
+        /* To finish the challenge issues of Chapter 8 of
+         * the <<Android Programming -- The Big Nerd Ranch Guide, 2nd ed.
+         *
+         * The format methods in this class implement a subset of Unicode UTS #35
+         * (http://www.unicode.org/reports/tr35/#Date_Format_Patterns) patterns.
+         */
+        // mDateButton.setText(mCrime.getDate().toString());
+        String sDate = (String)DateFormat.format("EEEE, MMMM dd, yyyy kk:mm", mCrime.getDate());
+        mDateButton.setText(sDate);
         mDateButton.setEnabled(false); // It is opened after Chapter 12
 
         mSolvedCheckBox = (CheckBox)v.findViewById(R.id.crime_solved);
